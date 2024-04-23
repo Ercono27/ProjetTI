@@ -16,6 +16,9 @@
                     <a class="nav-link active" aria-current="page" href="index_.php?page=gestion_clients.php">Gestion des clients</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index_.php?page=gestion_produits.php">Gestion des produits</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="">Link</a>
                 </li>
 
