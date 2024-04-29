@@ -1,5 +1,5 @@
-<h2>Gestion des clients</h2>
-<a href="index_.php?page=ajout_client.php">Nouveau client</a><br>
+<h2>Gestion des produits</h2>
+<a href="index_.php?page=ajout_produit.php">Nouveau produit</a><br>
 
 <?php
 //récupération des clients et affichage dans table bootstrap

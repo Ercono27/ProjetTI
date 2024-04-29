@@ -10,9 +10,9 @@ class ProduitDB
     {
         $this->_bd = $cnx;
     }
-
+/*
 //A REFAIRE -->infâme
-    public function updateClient($id,$champ,$valeur){
+    public function updateProduit($id,$champ,$valeur){
         //$query="select update_client(:id,:champ,:valeur)";
         $query= "update produit set $champ='$valeur' where id_produit=$id";
         try{
@@ -27,16 +27,17 @@ class ProduitDB
             print "Echec ".$e->getMessage();
         }
     }
-
-    public function ajout_produit($nom,$prenom,$email,$adresse,$numero){
+*/
+    public function ajout_produit($nom,$prix,$stock,$id_cat,$id_mar,$image){
         try{
-            $query="select ajout_client(:nom,:prenom,:email,:adresse,:numero)";
+            $query="select ajout_client(:nom,:prix,:stock,:id_cat,:id_mar,:image)";
             $res = $this->_bd->prepare($query);
             $res->bindValue(':nom',$nom);
-            $res->bindValue(':prenom',$prenom);
-            $res->bindValue(':email',$email);
-            $res->bindValue(':adresse',$adresse);
-            $res->bindValue(':numero',$numero);
+            $res->bindValue(':prix',$prix);
+            $res->bindValue(':stock',$stock);
+            $res->bindValue(':id_cat',$id_cat);
+            $res->bindValue(':id_mar',$id_mar);
+            $res->bindValue(':image',$image);
             $res->execute();
             $data = $res->fetch();
             return $data;

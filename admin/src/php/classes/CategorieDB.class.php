@@ -32,7 +32,7 @@ class CategorieDB extends Categorie
 
     public function getAllCategories()
     {
-        $query = "select * from vue_categorie";
+        $query = "select * from vue_categorie order by nom_categorie";
         try {
             $this->_bd->beginTransaction();
             $resultset = $this->_bd->prepare($query);

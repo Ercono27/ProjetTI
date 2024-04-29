@@ -1,4 +1,12 @@
-<h2>Gestion des clients</h2>
+<?php
+$categorieDB = new CategorieDB($cnx);
+$categories = $categorieDB->getAllCategories();
+$marqueDB = new MarqueDB($cnx);
+$marques = $marqueDB->getAllMarques();
+?>
+
+
+<h2>Gestion des produits</h2>
 <div class="container">
     <form id="form_ajout" method="get" action="">
         <div class="mb-3">
@@ -15,11 +23,23 @@
         </div>
         <div class="mb-3">
             <label for="cat" class="form-label">Catégorie</label>
-            <input type="email" class="form-control" id="cat">
+            <select class="form-control" id="cat" name="cat">
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= $category->nom_categorie ?>"><?= $category->nom_categorie ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="marque" class="form-label">Marque</label>
-            <input type="text" class="form-control" id="marque">
+            <select class="form-control" id="marque" name="marque">
+                <?php foreach ($marques as $marque): ?>
+                    <option value="<?= $marque->nom_marque ?>"><?= $marque->nom_marque ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="text" class="form-control" id="image">
         </div>
         <button type="submit" id="texte_bouton_submit" class="btn btn-primary">
             Ajouter ou Modifier
