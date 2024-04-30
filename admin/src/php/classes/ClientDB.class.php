@@ -73,13 +73,25 @@ class ClientDB
                 return $_array;
             }
             else{
-                return null;
+                return -1;
             }
-
             return $data;
         }catch(PDOException $e){
             print "Echec ".$e->getMessage();
         }
+    }
+
+    public function deleteClient($id){
+        try {
+            $query="select delete_client(:id)";
+            $res = $this->_bd->prepare($query);
+                $res->bindValue(':id',$id);
+                $res->execute();
+                $data = $res->fetch();
+                return $data;
+            }catch(PDOException $e){
+                print "Echec ".$e->getMessage();
+            }
     }
 
 }

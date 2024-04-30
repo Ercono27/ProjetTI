@@ -1,12 +1,17 @@
 <?php
 $cat = new ProduitDB($cnx);
 $liste = $cat->getAllProduits();
-$nbr = count($liste);
+$flag=0;
 $categorieDB = new CategorieDB($cnx);
 $categories = $categorieDB->getAllCategories();
 $marqueDB = new MarqueDB($cnx);
 $marques = $marqueDB->getAllMarques();
-
+if ($liste==-1){
+    $flag=1;
+}
+else{
+    $nbr = count($liste);
+}
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -47,7 +52,9 @@ $marques = $marqueDB->getAllMarques();
                 </div>
             </div>
         </div>
-
+        <?php
+            if ($flag!=1) {
+        ?>
         <!-- Colonne des produits -->
         <div class="col-md-9" style="margin-left: 20%;">
             <div class="album py-5 bg-body-tertiary">
@@ -58,13 +65,7 @@ $marques = $marqueDB->getAllMarques();
                             ?>
                             <div class="col">
                                 <div class="card shadow-sm">
-                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                         xmlns="http://www.w3.org/2000/svg" role="img"
-                                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                         focusable="false"><title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"/>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg>
+                                    <img src="https://media.ldlc.com/r150/ld/products/00/06/00/29/LD0006002969.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Description de l'image">
                                     <div class="card-body">
                                         <p class="card-text">
                                             <?php
@@ -87,6 +88,7 @@ $marques = $marqueDB->getAllMarques();
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>
 

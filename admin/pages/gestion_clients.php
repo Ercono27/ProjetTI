@@ -2,7 +2,6 @@
 <a href="index_.php?page=ajout_client.php">Nouveau client</a><br>
 
 <?php
-//récupération des clients et affichage dans table bootstrap
 $clients = new ClientDB($cnx);
 $liste = $clients->getAllClients();
 if($liste == -1){
@@ -38,7 +37,7 @@ else{
             <td contenteditable="true" id="<?= $liste[$i]->id_client;?>" name="telephone"><?= $liste[$i]->telephone;?></td>
             <td contenteditable="true" id="<?= $liste[$i]->id_client;?>" name="adresse"><?= $liste[$i]->adresse;?></td>
             <td contenteditable="true" id="<?= $liste[$i]->id_client;?>" name="ville"><?= $liste[$i]->ville;?></td>
-            <td><img src="public/images/delete.jpg" alt="Effacer" id="delete"></td>
+            <td><img src="public/images/delete.jpg" alt="Effacer" class="delete_client"></td>
         </tr>
             <?php
         }

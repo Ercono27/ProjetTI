@@ -47,19 +47,6 @@ class ProduitDB
     }
 
 
-    public function getClientByEmail($email){
-        try{
-            $query="select * from client where email = :email";
-            $res = $this->_bd->prepare($query);
-            $res->bindValue(':email',$email);
-            $res->execute();
-            $data = $res->fetch();
-            return $data;
-        }catch(PDOException $e){
-            print "Echec ".$e->getMessage();
-        }
-    }
-
     public function getAllProduits(){
         try{
             $query="SELECT p.id_produit, p.nom_produit, p.prix, p.stock, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque ORDER BY p.id_produit;";
@@ -75,7 +62,19 @@ class ProduitDB
             else{
                 return -1;
             }
+            return $data;
+        }catch(PDOException $e){
+            print "Echec ".$e->getMessage();
+        }
+    }
 
+    public function deleteProduit($id){
+        try {
+            $query="select delete_produit(:id)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id',$id);
+            $res->execute();
+            $data = $res->fetch();
             return $data;
         }catch(PDOException $e){
             print "Echec ".$e->getMessage();

@@ -1,23 +1,23 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     //quand une balise contient des atttributs,
     //cette balise est un tableau
-    $("td[id]").click(function(){
+    $("td[id]").click(function () {
         //trim : supprimer les blancs avant et après
         let valeur1 = $.trim($(this).text());
         let id = $(this).attr('id');
         let name = $(this).attr('name');
-        console.log(valeur1+" id = "+id+" name = "+name);
-        $(this).blur(function(){
+        console.log(valeur1 + " id = " + id + " name = " + name);
+        $(this).blur(function () {
             let valeur2 = $.trim($(this).text());
-            if(valeur1 != valeur2){
-                let parametre = "id="+id+"&name="+name+"&valeur="+valeur2;
+            if (valeur1 != valeur2) {
+                let parametre = "id=" + id + "&name=" + name + "&valeur=" + valeur2;
                 let retour = $.ajax({
                     type: 'get',
                     dataType: 'json',
                     data: parametre,
                     url: './src/php/ajax/ajaxUpdateClient.php',
-                    success: function(data){//data = retour du # php
+                    success: function (data) {//data = retour du # php
                         console.log(data);
                     }
                 })
@@ -27,11 +27,11 @@ $(document).ready(function(){
 
     $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
 
-    $('#reset').click(function(){
+    $('#reset').click(function () {
         $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
     })
 
-    $('#texte_bouton_submit').click(function(e){ //e = formulaire
+    $('#texte_bouton_submit').click(function (e) { //e = formulaire
         e.preventDefault(); //empêcher l'attribut action de form
         let email = $('#email').val();
         let nom = $('#nom').val();
@@ -39,19 +39,19 @@ $(document).ready(function(){
         let adresse = $('#adresse').val();
         let telephone = $('#telephone').val();
         let ville = $('#ville').val();
-        let param = 'email='+email+'&nom='+nom+'&prenom='+prenom+'&adresse='+adresse+'&telephone='+telephone+'&ville='+ville;
+        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&telephone=' + telephone + '&ville=' + ville;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
             data: param,
             url: './src/php/ajax/ajaxAjoutClient.php',
-            success: function(data){//data = retour du # php
+            success: function (data) {//data = retour du # php
                 console.log(data);
             }
         })
     })
 
-    $('#texte_bouton_submit_produit').click(function(e){ //e = formulaire
+    $('#texte_bouton_submit_produit').click(function (e) { //e = formulaire
         e.preventDefault(); //empêcher l'attribut action de form
         let npro = $('#npro').val();
         let prix = $('#prix').val();
@@ -67,44 +67,95 @@ $(document).ready(function(){
         console.log("Marque :", marque);
         console.log("Image :", image);
 */
-        let param = 'npro='+npro+'&prix='+prix+'&stock='+stock+'&cat='+cat+'&marque='+marque+'&image='+image;
+        let param = 'npro=' + npro + '&prix=' + prix + '&stock=' + stock + '&cat=' + cat + '&marque=' + marque + '&image=' + image;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
             data: param,
             url: './src/php/ajax/ajaxAjoutProduit.php',
-            success: function(data){//data = retour du # php
+            success: function (data) {//data = retour du # php
                 console.log(data);
             }
 
         })
     })
 
-    $('#email').blur(function(){
+    $('#email').blur(function () {
         let email = $(this).val();
-        console.log("email : "+email);
-        let parametre = 'email='+email;
+        console.log("email : " + email);
+        let parametre = 'email=' + email;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
             data: parametre,
             url: './src/php/ajax/ajaxRechercheClient.php',
-            success: function(data){//data = retour du # php
+            success: function (data) {//data = retour du # php
                 console.log(data);
                 $('#nom').val(data[0].nom_client);
                 $('#prenom').val(data[0].prenom_client);
                 $('#adresse').val(data[0].adresse);
                 $('#numero').val(data[0].numero);
-                let nom2=$('#nom').val();
-                if (nom2 !==''){
+                let nom2 = $('#nom').val();
+                if (nom2 !== '') {
                     $('#texte_bouton_submit').text("Modifier");
-                }else{
+                } else {
                     $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
                 }
 
             }
         })
     })
+
+    $(document).on('click', '.delete_client', function () {
+        let id_client = $(this).closest('tr').find('th').text();
+
+        let param = 'id_client=' + id_client;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: './src/php/ajax/ajaxDeleteClient.php',
+            success: function (data) {
+                console.log(data);
+                $(this).closest('tr').remove();
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+    $(document).on('click', '.delete_prod', function () {
+        let id_produit = $(this).closest('tr').find('th').text();
+        console.log(id_produit);
+        let param = 'id_produit=' + id_produit;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: './src/php/ajax/ajaxDeleteProduit.php',
+            success: function (data) {
+                console.log(data);
+                $(this).closest('tr').remove();
+                actualiserListeProduits();
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+    function actualiserListeProduits() {
+        $.ajax({
+            type: 'GET',
+            url: './src/php/ajax/ajaxAffichageProduit.php',
+            success: function (data) {
+                $('#table table-striped').html(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
 
 });
 
