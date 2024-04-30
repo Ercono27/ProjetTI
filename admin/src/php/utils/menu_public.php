@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">LCLD</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,12 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <i class="bi bi-person-circle" style="font-size: 1.5em;height: fit-content;justify-content: center;margin-right: 2em"></i>
+            <a href="index_.php?page=login.php" style="display: flex; align-items: center;text-decoration: none;color: black">
+                <i class="bi bi-person-circle" style="font-size: 1.5em; margin-right: 0.5em"></i>
+            </a>
+            <a href="#" style="display: flex; align-items: center;text-decoration: none;color: black">
+                <i class="bi bi-cart2" style="font-size: 1.5em; margin-right: 0.5em"></i>
+            </a>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

@@ -39,7 +39,8 @@ $(document).ready(function () {
         let adresse = $('#adresse').val();
         let telephone = $('#telephone').val();
         let ville = $('#ville').val();
-        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&telephone=' + telephone + '&ville=' + ville;
+        let mdp=$('#mdp').val();
+        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&telephone=' + telephone + '&ville=' + ville+'&mdp='+mdp;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
@@ -79,7 +80,7 @@ $(document).ready(function () {
 
         })
     })
-
+/*
     $('#email').blur(function () {
         let email = $(this).val();
         console.log("email : " + email);
@@ -105,7 +106,7 @@ $(document).ready(function () {
             }
         })
     })
-
+*/
     $(document).on('click', '.delete_client', function () {
         let id_client = $(this).closest('tr').find('th').text();
 
@@ -143,19 +144,39 @@ $(document).ready(function () {
             }
         });
     });
+    $('#enregistrement').click(function (e){
+        e.preventDefault();
+        let email = $('#email').val();
+        let mdp = $('#mdp').val();
+        let nom = $('#nom').val();
+        let prenom = $('#prenom').val();
+        let adresse = $('#adresse').val();
+        let ville = $('#ville').val();
 
-    function actualiserListeProduits() {
-        $.ajax({
-            type: 'GET',
-            url: './src/php/ajax/ajaxAffichageProduit.php',
-            success: function (data) {
-                $('#table table-striped').html(data);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
+        /*if (email.trim() === '' || mdp.trim() === '' || nom.trim() === '' || prenom.trim() === '' || adresse.trim() === '' || ville.trim() === '') {
+            alert('Veuillez remplir tous les champs du formulaire.');
+            return;
+        }
+*/
+        console.log(email,mdp,nom,prenom);
+        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&ville=' + ville+'&mdp='+mdp;
+        let retour = $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: 'admin/src/php/ajax/ajaxAjoutClient.php',
+            success: function (data) {//data = retour du # php
+                console.log(data);
             }
-        });
-    }
+        })
+
+
+
+
+
+
+
+    })
 
 });
 

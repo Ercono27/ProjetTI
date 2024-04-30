@@ -21,16 +21,20 @@ if (isset($_POST['submit_login'])) { //name du submit
     }
 }
 ?>
-<!-- formulaire de cnx ici -->
 
 <form method="post" action="<?= $_SERVER['PHP_SELF'];?>">
     <div class="mb-3">
-        <label for="login" class="form-label">Email address</label>
+        <label for="login" class="form-label">Adresse email :</label>
         <input type="text" name="login" class="form-control" id="login" aria-describedby="loginHelp">
     </div>
     <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
+        <label for="password" class="form-label">Mot de passe :</label>
         <input type="password" name="password" class="form-control" id="password">
     </div>
     <button type="submit" name="submit_login" class="btn btn-primary">Connexion</button>
 </form>
+
+<div>
+    Pas encore de compte?
+    <a href="index_.php?page=inscription.php">Cliquez ici?</a>
+</div>

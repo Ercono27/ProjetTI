@@ -15,7 +15,6 @@ else{
 ?>
 <div class="container-fluid">
     <div class="row">
-        <!-- Colonne du menu de recherche -->
         <div class="col-md-2" style="position: fixed">
             <div class="card">
                 <div class="card-body">
@@ -39,13 +38,11 @@ else{
                         </div>
                         <div class="mb-3">
                             <label for="searchMinPrice" class="form-label">Prix minimum: <span id="minPriceLabel">0</span></label>
-                            <!-- Curseur de prix minimal -->
-                            <input type="range" class="form-range" id="searchMinPrice" min="0" max="10000" step="10" value="0" oninput="document.getElementById('minPriceLabel').textContent = this.value;">
+                            <input type="range" class="form-range" id="searchMinPrice" min="0" max="2550" step="10" value="0" oninput="document.getElementById('minPriceLabel').textContent = this.value;">
                         </div>
                         <div class="mb-3">
-                            <label for="searchMaxPrice" class="form-label">Prix maximum: <span id="maxPriceLabel">10000</span></label>
-                            <!-- Curseur de prix maximal -->
-                            <input type="range" class="form-range" id="searchMaxPrice" min="0" max="10000" step="10" value="10000" oninput="document.getElementById('maxPriceLabel').textContent = this.value;">
+                            <label for="searchMaxPrice" class="form-label">Prix maximum: <span id="maxPriceLabel">2550</span></label>
+                            <input type="range" class="form-range" id="searchMaxPrice" min="0" max="2550" step="10" value="10000" oninput="document.getElementById('maxPriceLabel').textContent = this.value;">
                         </div>
                         <button type="submit" class="btn btn-primary">Rechercher</button>
                     </form>
@@ -65,11 +62,12 @@ else{
                             ?>
                             <div class="col">
                                 <div class="card shadow-sm">
-                                    <img src="https://media.ldlc.com/r150/ld/products/00/06/00/29/LD0006002969.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Description de l'image">
+                                    <img src="<?php print $liste[$i]->image ?>" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="<?php print $liste[$i]->nom_produit?>">
                                     <div class="card-body">
                                         <p class="card-text">
                                             <?php
-                                            print $liste[$i]->nom_produit;
+                                            print $liste[$i]->nom_produit." ";
+                                            print $liste[$i]->prix;
                                             ?>
                                         </p>
                                         <div class="d-flex justify-content-between align-items-center">

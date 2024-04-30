@@ -28,16 +28,16 @@ class ClientDB
         }
     }
 
-    public function ajout_client($prenom,$nom,$email,$telephone,$adresse,$ville){
+    public function ajout_client($prenom,$nom,$email,$adresse,$ville,$mdp){
         try{
-            $query="select ajout_client(:prenom_client,:nom_client,:email,:telephone,:adresse,:ville)";
+            $query="select ajout_client(:prenom_client,:nom_client,:email,:adresse,:ville,:mdp)";
             $res = $this->_bd->prepare($query);
             $res->bindValue(':prenom_client',$prenom);
             $res->bindValue(':nom_client',$nom);
             $res->bindValue(':email',$email);
-            $res->bindValue(':telephone',$telephone);
             $res->bindValue(':adresse',$adresse);
             $res->bindValue(':ville',$ville);
+            $res->bindValue(':mdp',$mdp);
             $res->execute();
             $data = $res->fetch();
             return $data;
