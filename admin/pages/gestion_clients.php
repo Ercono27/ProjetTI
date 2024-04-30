@@ -5,13 +5,11 @@
 //récupération des clients et affichage dans table bootstrap
 $clients = new ClientDB($cnx);
 $liste = $clients->getAllClients();
-//var_dump($liste);
-$nbr = count($liste);
-
-if($nbr == 0){
+if($liste == -1){
     print "<br>Aucun client encodé<br>";
 }
 else{
+    $nbr = count($liste);
     ?>
     <table class="table table-striped">
         <thead>

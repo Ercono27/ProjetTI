@@ -38,7 +38,7 @@ class CategorieDB extends Categorie
             $resultset = $this->_bd->prepare($query);
             $resultset->execute();
             $data = $resultset->fetchAll();
-            //var_dump($data);
+            $this->_bd->commit();
             foreach ($data as $d) {
                 $_array[] = new Categorie($d);
             }

@@ -15,7 +15,7 @@
         </div>
         <div class="mb-3">
             <label for="telephone" class="form-label">Téléphone</label>
-            <input type="email" class="form-control" id="telephone">
+            <input type="text" class="form-control" id="telephone">
         </div>
         <div class="mb-3">
             <label for="adresse" class="form-label">Adresse</label>

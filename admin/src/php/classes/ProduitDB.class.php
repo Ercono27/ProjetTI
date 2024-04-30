@@ -28,15 +28,15 @@ class ProduitDB
         }
     }
 */
-    public function ajout_produit($nom,$prix,$stock,$id_cat,$id_mar,$image){
+    public function ajout_produit($npro,$prix,$stock,$cat,$marque,$image){
         try{
-            $query="select ajout_client(:nom,:prix,:stock,:id_cat,:id_mar,:image)";
+            $query="select insert_produits(:npro,:prix,:stock,:cat,:marque,:image)";
             $res = $this->_bd->prepare($query);
-            $res->bindValue(':nom',$nom);
+            $res->bindValue(':npro',$npro);
             $res->bindValue(':prix',$prix);
             $res->bindValue(':stock',$stock);
-            $res->bindValue(':id_cat',$id_cat);
-            $res->bindValue(':id_mar',$id_mar);
+            $res->bindValue(':cat',$cat);
+            $res->bindValue(':marque',$marque);
             $res->bindValue(':image',$image);
             $res->execute();
             $data = $res->fetch();
@@ -60,9 +60,9 @@ class ProduitDB
         }
     }
 
-    public function getAllClients(){
+    public function getAllProduits(){
         try{
-            $query="select * from client order by nom_client";
+            $query="SELECT p.id_produit, p.nom_produit, p.prix, p.stock, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque ORDER BY p.id_produit;";
             $res = $this->_bd->prepare($query);
             $res->execute();
             $data = $res->fetchAll();
@@ -73,7 +73,7 @@ class ProduitDB
                 return $_array;
             }
             else{
-                return null;
+                return -1;
             }
 
             return $data;

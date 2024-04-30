@@ -11,15 +11,15 @@ $marques = $marqueDB->getAllMarques();
     <form id="form_ajout" method="get" action="">
         <div class="mb-3">
             <label for="npro" class="form-label">Nom produit</label>
-            <input type="text" class="form-control" id="npo">
+            <input type="text" class="form-control" id="npro">
         </div>
         <div class="mb-3">
             <label for="prix" class="form-label">Prix</label>
-            <input type="number" class="form-control" id="prix">
+            <input type="number" step="0.01" class="form-control" id="prix">
         </div>
         <div class="mb-3">
             <label for="stock" class="form-label">Quantité en stock</label>
-            <input type="text" class="form-control" id="prenom">
+            <input type="number" class="form-control" id="stock">
         </div>
         <div class="mb-3">
             <label for="cat" class="form-label">Catégorie</label>
@@ -41,7 +41,7 @@ $marques = $marqueDB->getAllMarques();
             <label for="image" class="form-label">Image</label>
             <input type="text" class="form-control" id="image">
         </div>
-        <button type="submit" id="texte_bouton_submit" class="btn btn-primary">
+        <button type="submit" id="texte_bouton_submit_produit" class="btn btn-primary">
             Ajouter ou Modifier
         </button>
         <button class="btn btn-primary" type="reset" id="reset">Annuler</button>

@@ -12,22 +12,22 @@ class MarqueDB extends Marque
     }
     public function getAllMarques()
     {
-        $query = "select * from vue_marque order by nom_marque";
+        $query = "SELECT * FROM vue_marque ORDER BY nom_marque";
         try {
             $this->_bd->beginTransaction();
             $resultset = $this->_bd->prepare($query);
             $resultset->execute();
             $data = $resultset->fetchAll();
-            //var_dump($data);
             foreach ($data as $d) {
-                $_array[] = new Categorie($d);
+                $_array[] = new Marque($d); // Utiliser la classe Marque plutôt que Categorie
             }
-            return $_array;
             $this->_bd->commit();
+            return $_array;
         } catch (PDOException $e) {
             $this->_bd->rollback();
             print "Echec de la requête " . $e->getMessage();
         }
     }
+
 
 }

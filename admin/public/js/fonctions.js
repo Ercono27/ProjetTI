@@ -37,8 +37,9 @@ $(document).ready(function(){
         let nom = $('#nom').val();
         let prenom = $('#prenom').val();
         let adresse = $('#adresse').val();
-        let numero = $('#numero').val();
-        let param = 'email='+email+'&nom='+nom+'&prenom='+prenom+'&adresse='+adresse+'&numero='+numero;
+        let telephone = $('#telephone').val();
+        let ville = $('#ville').val();
+        let param = 'email='+email+'&nom='+nom+'&prenom='+prenom+'&adresse='+adresse+'&telephone='+telephone+'&ville='+ville;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
@@ -47,6 +48,35 @@ $(document).ready(function(){
             success: function(data){//data = retour du # php
                 console.log(data);
             }
+        })
+    })
+
+    $('#texte_bouton_submit_produit').click(function(e){ //e = formulaire
+        e.preventDefault(); //empêcher l'attribut action de form
+        let npro = $('#npro').val();
+        let prix = $('#prix').val();
+        let stock = $('#stock').val();
+        let cat = $('#cat').val();
+        let marque = $('#marque').val();
+        let image = $('#image').val();
+        /*
+        console.log("Nom produit :", npro);
+        console.log("Prix :", prix);
+        console.log("Stock :", stock);
+        console.log("Catégorie :", cat);
+        console.log("Marque :", marque);
+        console.log("Image :", image);
+*/
+        let param = 'npro='+npro+'&prix='+prix+'&stock='+stock+'&cat='+cat+'&marque='+marque+'&image='+image;
+        let retour = $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: './src/php/ajax/ajaxAjoutProduit.php',
+            success: function(data){//data = retour du # php
+                console.log(data);
+            }
+
         })
     })
 
@@ -77,3 +107,5 @@ $(document).ready(function(){
     })
 
 });
+
+
