@@ -29,7 +29,7 @@ $produit = $pro->getProduit($id_produit);
                         </div>
                     </div>
                     <div style="padding: 20% 0 20% 0"><?php if ($produit['stock'] > 0) { ?>
-                                <button style="font-family: 'system-ui';border: none;font-weight: bold;background-color: #ff9103;border-radius: 5px;"> <i class="bi bi-basket3"></i> Ajouter au panier</button>
+                                <button id="btnAjoutPanier" style="font-family: 'system-ui';border: none;font-weight: bold;background-color: #ff9103;border-radius: 5px;"> <i class="bi bi-basket3"></i> Ajouter au panier</button>
                         <?php } else { ?>
                             Rupture de stock
                         <?php } ?>

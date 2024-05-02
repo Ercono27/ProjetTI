@@ -10,66 +10,69 @@ class ProduitDB
     {
         $this->_bd = $cnx;
     }
-/*
-//A REFAIRE -->infâme
-    public function updateProduit($id,$champ,$valeur){
-        //$query="select update_client(:id,:champ,:valeur)";
-        $query= "update produit set $champ='$valeur' where id_produit=$id";
-        try{
-            $res = $this->_bd->prepare($query);
-            $res->bindvalue(':id',$id);
-            $res->bindvalue(':champ',$champ);
-            $res->bindvalue(':valeur',$valeur);
-            $res->execute();
-            $this->_bd->commit();
-        }catch(PDOException $e){
-            $this->_bd->rollback();
-            print "Echec ".$e->getMessage();
+
+    /*
+    //A REFAIRE -->infâme
+        public function updateProduit($id,$champ,$valeur){
+            //$query="select update_client(:id,:champ,:valeur)";
+            $query= "update produit set $champ='$valeur' where id_produit=$id";
+            try{
+                $res = $this->_bd->prepare($query);
+                $res->bindvalue(':id',$id);
+                $res->bindvalue(':champ',$champ);
+                $res->bindvalue(':valeur',$valeur);
+                $res->execute();
+                $this->_bd->commit();
+            }catch(PDOException $e){
+                $this->_bd->rollback();
+                print "Echec ".$e->getMessage();
+            }
         }
-    }
-*/
-    public function ajout_produit($npro,$prix,$stock,$cat,$marque,$image,$description){
-        try{
-            $query="select insert_produits(:npro,:prix,:stock,:cat,:marque,:image,:description)";
+    */
+    public function ajout_produit($npro, $prix, $stock, $cat, $marque, $image, $description)
+    {
+        try {
+            $query = "select insert_produits(:npro,:prix,:stock,:cat,:marque,:image,:description)";
             $res = $this->_bd->prepare($query);
-            $res->bindValue(':npro',$npro);
-            $res->bindValue(':prix',$prix);
-            $res->bindValue(':stock',$stock);
-            $res->bindValue(':cat',$cat);
-            $res->bindValue(':marque',$marque);
-            $res->bindValue(':image',$image);
-            $res->bindValue(':description',$description);
+            $res->bindValue(':npro', $npro);
+            $res->bindValue(':prix', $prix);
+            $res->bindValue(':stock', $stock);
+            $res->bindValue(':cat', $cat);
+            $res->bindValue(':marque', $marque);
+            $res->bindValue(':image', $image);
+            $res->bindValue(':description', $description);
             $res->execute();
             $data = $res->fetch();
             return $data;
-        }catch(PDOException $e){
-            print "Echec ".$e->getMessage();
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
         }
     }
 
 
-    public function getAllProduits(){
-        try{
-            $query="SELECT p.id_produit, p.nom_produit, p.prix, p.stock,p.description, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque ORDER BY p.id_produit;";
+    public function getAllProduits()
+    {
+        try {
+            $query = "SELECT p.id_produit, p.nom_produit, p.prix, p.stock,p.description, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque ORDER BY p.id_produit;";
             $res = $this->_bd->prepare($query);
             $res->execute();
             $data = $res->fetchAll();
-            if(!empty($data))  {
-                foreach($data as $d) {
+            if (!empty($data)) {
+                foreach ($data as $d) {
                     $_array[] = new Produit($d);
                 }
                 return $_array;
-            }
-            else{
+            } else {
                 return -1;
             }
             return $data;
-        }catch(PDOException $e){
-            print "Echec ".$e->getMessage();
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
         }
     }
 
-    public function getProduit($npro) {
+    public function getProduit($npro)
+    {
         try {
             $query = "SELECT p.id_produit, p.nom_produit, p.prix, p.stock, p.description, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque WHERE p.id_produit= :npro;";
             $res = $this->_bd->prepare($query);
@@ -77,23 +80,65 @@ class ProduitDB
             $res->execute();
             return $res->fetch();
         } catch (PDOException $e) {
-            print "Echec ".$e->getMessage();
+            print "Echec " . $e->getMessage();
         }
     }
 
 
-    public function deleteProduit($id){
+    public function deleteProduit($id)
+    {
         try {
-            $query="select delete_produit(:id)";
+            $query = "select delete_produit(:id)";
             $res = $this->_bd->prepare($query);
-            $res->bindValue(':id',$id);
+            $res->bindValue(':id', $id);
             $res->execute();
             $data = $res->fetch();
             return $data;
-        }catch(PDOException $e){
-            print "Echec ".$e->getMessage();
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
         }
     }
+
+    public function rechercheProduit($cat, $marque, $primin, $primax)
+    {
+        try {
+            $query = "SELECT p.id_produit, p.nom_produit, p.prix, p.stock, p.description, c.nom_categorie AS nom_cat, 
+                  m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie 
+                  INNER JOIN marque m ON p.id_marque = m.id_marque WHERE 1=1";
+            $params = array();
+            if ($cat !== '') {
+                $query .= " AND p.id_categorie = :cat";
+                $params[':cat'] = $cat;
+            }
+            if ($marque !== '') {
+                $query .= " AND p.id_marque = :marque";
+                $params[':marque'] = $marque;
+            }
+            if ($primin !== '') {
+                $query .= " AND p.prix >= :primin";
+                $params[':primin'] = $primin;
+            }
+            if ($primax !== '') {
+                $query .= " AND p.prix <= :primax";
+                $params[':primax'] = $primax;
+            }
+            $res = $this->_bd->prepare($query);
+            $res->execute($params);
+            $data = $res->fetchAll();
+            $resultArray = array();
+            if (!empty($data)) {
+                foreach ($data as $d) {
+                    $resultArray[] = new Produit($d);
+                }
+            }
+            return $resultArray;
+        } catch (PDOException $e) {
+            print "Echec de la requête " . $e->getMessage();
+            return false;
+        }
+    }
+
+
 
 }
 

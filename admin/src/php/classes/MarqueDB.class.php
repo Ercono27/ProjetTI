@@ -19,7 +19,7 @@ class MarqueDB extends Marque
             $resultset->execute();
             $data = $resultset->fetchAll();
             foreach ($data as $d) {
-                $_array[] = new Marque($d); // Utiliser la classe Marque plutôt que Categorie
+                $_array[] = new Marque($d);
             }
             $this->_bd->commit();
             return $_array;

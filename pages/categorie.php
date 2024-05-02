@@ -1,13 +1,14 @@
 <?php
 $cat = new CategorieDB($cnx);
-$liste = $cat->getProduitsById_cat($_GET['id_categorie']);
-$nbr = count($liste);
+$liste = $cat->getAllCategories();
+$nbr_cat = count($liste);
+
 ?>
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <?php
-            for($i=0; $i < $nbr; $i++){
+            for($i=0; $i < $nbr_cat; $i++){
                 ?>
                 <div class="col">
                     <div class="card shadow-sm">
@@ -15,15 +16,16 @@ $nbr = count($liste);
                         <div class="card-body">
                             <p class="card-text">
                                 <?php
-                                print $liste[$i]->nom_produit;
+                                print $liste[$i]->nom_categorie;
                                 ?>
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <a href="index_.php?id_categorie=<?php print $liste[$i]->id_categorie;?>&page=produits_categorie.php" type="button" class="btn btn-sm btn-outline-secondary" >View</a>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <?php

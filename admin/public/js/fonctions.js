@@ -39,8 +39,8 @@ $(document).ready(function () {
         let adresse = $('#adresse').val();
         let telephone = $('#telephone').val();
         let ville = $('#ville').val();
-        let mdp=$('#mdp').val();
-        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&telephone=' + telephone + '&ville=' + ville+'&mdp='+mdp;
+        let mdp = $('#mdp').val();
+        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&telephone=' + telephone + '&ville=' + ville + '&mdp=' + mdp;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
@@ -69,7 +69,7 @@ $(document).ready(function () {
         console.log("Marque :", marque);
         console.log("Image :", image);
 */
-        let param = 'npro=' + npro + '&prix=' + prix + '&stock=' + stock + '&cat=' + cat + '&marque=' + marque + '&image=' + image +'&description='+description;
+        let param = 'npro=' + npro + '&prix=' + prix + '&stock=' + stock + '&cat=' + cat + '&marque=' + marque + '&image=' + image + '&description=' + description;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
@@ -80,33 +80,33 @@ $(document).ready(function () {
             }
         })
     })
-/*
-    $('#email').blur(function () {
-        let email = $(this).val();
-        console.log("email : " + email);
-        let parametre = 'email=' + email;
-        let retour = $.ajax({
-            type: 'get',
-            dataType: 'json',
-            data: parametre,
-            url: './src/php/ajax/ajaxRechercheClient.php',
-            success: function (data) {//data = retour du # php
-                console.log(data);
-                $('#nom').val(data[0].nom_client);
-                $('#prenom').val(data[0].prenom_client);
-                $('#adresse').val(data[0].adresse);
-                $('#numero').val(data[0].numero);
-                let nom2 = $('#nom').val();
-                if (nom2 !== '') {
-                    $('#texte_bouton_submit').text("Modifier");
-                } else {
-                    $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
-                }
+    /*
+        $('#email').blur(function () {
+            let email = $(this).val();
+            console.log("email : " + email);
+            let parametre = 'email=' + email;
+            let retour = $.ajax({
+                type: 'get',
+                dataType: 'json',
+                data: parametre,
+                url: './src/php/ajax/ajaxRechercheClient.php',
+                success: function (data) {//data = retour du # php
+                    console.log(data);
+                    $('#nom').val(data[0].nom_client);
+                    $('#prenom').val(data[0].prenom_client);
+                    $('#adresse').val(data[0].adresse);
+                    $('#numero').val(data[0].numero);
+                    let nom2 = $('#nom').val();
+                    if (nom2 !== '') {
+                        $('#texte_bouton_submit').text("Modifier");
+                    } else {
+                        $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
+                    }
 
-            }
+                }
+            })
         })
-    })
-*/
+    */
     $(document).on('click', '.delete_client', function () {
         let id_client = $(this).closest('tr').find('th').text();
 
@@ -145,7 +145,7 @@ $(document).ready(function () {
             }
         });
     });
-    $('#enregistrement').click(function (e){
+    $('#enregistrement').click(function (e) {
         e.preventDefault();
         let email = $('#email').val();
         let mdp = $('#mdp').val();
@@ -159,8 +159,8 @@ $(document).ready(function () {
             return;
         }
 */
-        console.log(email,mdp,nom,prenom);
-        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&ville=' + ville+'&mdp='+mdp;
+        console.log(email, mdp, nom, prenom);
+        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&ville=' + ville + '&mdp=' + mdp;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
@@ -168,17 +168,43 @@ $(document).ready(function () {
             url: 'admin/src/php/ajax/ajaxAjoutClient.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
+                window.location.reload();
             }
         })
-
-
-
-
-
-
-
+    })
+    $('btnAjoutPanier').click(function (e) {
+        console.log('test');
     })
 
+    $('#submit_recherche_approfondi').click(function (e) {
+        e.preventDefault();
+        const cat = $('#cat').val();
+        const marque = $('#marque').val();
+        const searchMinPrice = $('#searchMinPrice').val();
+        const searchMaxPrice = $('#searchMaxPrice').val();
+
+        let params = {
+            cat: cat,
+            marque: marque,
+            searchMinPrice: searchMinPrice,
+            searchMaxPrice: searchMaxPrice
+        };
+        console.log(params);
+        $.getJSON({
+            type: 'GET',
+            dataType: 'json',
+            data: params,
+            url: 'admin/src/php/ajax/ajaxProduitRecherche.php',
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                alert('Erreur: ' + xhr.responseText);
+            }
+        });
+    });
 });
+
 
 
