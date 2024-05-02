@@ -1,4 +1,4 @@
-create or replace function insert_produits(text,integer,integer,text,text,text)returns integer
+create or replace function insert_produits(text,integer,integer,text,text,text,text)returns integer
 as
 '
 
@@ -8,6 +8,7 @@ as
   declare p_nom_cat alias for $4;
   declare p_nom_marque alias for $5;
   declare p_image alias for $6;
+  declare p_description alias for $7;
   declare id integer;
   declare id_cat integer;
   declare id_mar integer;
@@ -19,8 +20,8 @@ begin
 	then
 	  select into id_cat id_categorie from categorie where nom_categorie = p_nom_cat;
 	  select into id_mar id_marque from marque where nom_marque = p_nom_marque;
-	  insert into produit (nom_produit,prix,stock,id_categorie,id_marque,image) values
-	    (p_produit,p_prix,p_stock,id_cat,id_mar,p_image);
+	  insert into produit (nom_produit,prix,stock,id_categorie,id_marque,image,description) values
+	    (p_produit,p_prix,p_stock,id_cat,id_mar,p_image,p_description);
 	  select into id id_produit from produit where nom_produit = p_produit;
 	  if not found
 	  then

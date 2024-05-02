@@ -1,0 +1,10 @@
+.table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table th,
+.table td {
+    overflow: auto;
+    white-space: nowrap;
+}

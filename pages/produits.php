@@ -66,14 +66,14 @@ else{
                                     <div class="card-body">
                                         <p class="card-text">
                                             <?php
+                                            print $liste[$i]->nom_marque." ";
                                             print $liste[$i]->nom_produit." ";
                                             print $liste[$i]->prix;
                                             ?>
                                         </p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">View
-                                                </button>
+                                                <a href="index_.php?id_produit=<?php print $liste[$i]->id_produit;?>&page=produit.php" type="button" class="btn btn-sm btn-outline-secondary" >View</a>
                                             </div>
                                         </div>
                                     </div>

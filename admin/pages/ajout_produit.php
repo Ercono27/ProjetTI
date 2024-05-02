@@ -41,8 +41,12 @@ $marques = $marqueDB->getAllMarques();
             <label for="image" class="form-label">Image</label>
             <input type="text" class="form-control" id="image">
         </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description">
+        </div>
         <button type="submit" id="texte_bouton_submit_produit" class="btn btn-primary">
-            Ajouter ou Modifier
+            Ajouter
         </button>
         <button class="btn btn-primary" type="reset" id="reset">Annuler</button>
     </form>

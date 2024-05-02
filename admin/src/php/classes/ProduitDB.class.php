@@ -28,9 +28,9 @@ class ProduitDB
         }
     }
 */
-    public function ajout_produit($npro,$prix,$stock,$cat,$marque,$image){
+    public function ajout_produit($npro,$prix,$stock,$cat,$marque,$image,$description){
         try{
-            $query="select insert_produits(:npro,:prix,:stock,:cat,:marque,:image)";
+            $query="select insert_produits(:npro,:prix,:stock,:cat,:marque,:image,:description)";
             $res = $this->_bd->prepare($query);
             $res->bindValue(':npro',$npro);
             $res->bindValue(':prix',$prix);
@@ -38,6 +38,7 @@ class ProduitDB
             $res->bindValue(':cat',$cat);
             $res->bindValue(':marque',$marque);
             $res->bindValue(':image',$image);
+            $res->bindValue(':description',$description);
             $res->execute();
             $data = $res->fetch();
             return $data;
@@ -49,13 +50,13 @@ class ProduitDB
 
     public function getAllProduits(){
         try{
-            $query="SELECT p.id_produit, p.nom_produit, p.prix, p.stock, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque ORDER BY p.id_produit;";
+            $query="SELECT p.id_produit, p.nom_produit, p.prix, p.stock,p.description, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque ORDER BY p.id_produit;";
             $res = $this->_bd->prepare($query);
             $res->execute();
             $data = $res->fetchAll();
             if(!empty($data))  {
                 foreach($data as $d) {
-                    $_array[] = new Client($d);
+                    $_array[] = new Produit($d);
                 }
                 return $_array;
             }
@@ -67,6 +68,19 @@ class ProduitDB
             print "Echec ".$e->getMessage();
         }
     }
+
+    public function getProduit($npro) {
+        try {
+            $query = "SELECT p.id_produit, p.nom_produit, p.prix, p.stock, p.description, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque WHERE p.id_produit= :npro;";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':npro', $npro);
+            $res->execute();
+            return $res->fetch();
+        } catch (PDOException $e) {
+            print "Echec ".$e->getMessage();
+        }
+    }
+
 
     public function deleteProduit($id){
         try {

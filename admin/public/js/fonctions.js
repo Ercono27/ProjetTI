@@ -60,6 +60,7 @@ $(document).ready(function () {
         let cat = $('#cat').val();
         let marque = $('#marque').val();
         let image = $('#image').val();
+        let description = $('#description').val();
         /*
         console.log("Nom produit :", npro);
         console.log("Prix :", prix);
@@ -68,7 +69,7 @@ $(document).ready(function () {
         console.log("Marque :", marque);
         console.log("Image :", image);
 */
-        let param = 'npro=' + npro + '&prix=' + prix + '&stock=' + stock + '&cat=' + cat + '&marque=' + marque + '&image=' + image;
+        let param = 'npro=' + npro + '&prix=' + prix + '&stock=' + stock + '&cat=' + cat + '&marque=' + marque + '&image=' + image +'&description='+description;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
@@ -77,7 +78,6 @@ $(document).ready(function () {
             success: function (data) {//data = retour du # php
                 console.log(data);
             }
-
         })
     })
 /*
@@ -119,6 +119,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
+                window.location.reload();
             },
             error: function (xhr, status, error) {
                 console.error(error);
@@ -137,7 +138,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
-                actualiserListeProduits();
+                window.location.reload();
             },
             error: function (xhr, status, error) {
                 console.error(error);
