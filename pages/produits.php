@@ -68,8 +68,8 @@ if ($liste == -1) {
                         <?php
                         for ($i = 0; $i < $nbr; $i++) {
                             ?>
-                            <div class="col"> <!-- Ajout de la classe 'col' -->
-                                <div class="card h-100 shadow-sm"> <!-- Ajout de la classe 'h-100' -->
+                            <div class="col">
+                                <div class="card h-100 shadow-sm">
                                     <img src="<?php print $liste[$i]->image ?>"
                                          class="bd-placeholder-img card-img-top" width="100%" height="225"
                                          alt="<?php print $liste[$i]->nom_produit ?>">

@@ -1,7 +1,4 @@
 $(document).ready(function () {
-
-    //quand une balise contient des atttributs,
-    //cette balise est un tableau
     $("td[id]").click(function () {
         //trim : supprimer les blancs avant et après
         let valeur1 = $.trim($(this).text());

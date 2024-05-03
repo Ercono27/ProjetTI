@@ -13,6 +13,9 @@
                     <a class="nav-link active" aria-current="page" href="index_.php?page=categorie.php">Catégorie</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index_.php?page=marques.php">Marque</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index_.php?page=produits.php">Tout les produits</a>
                 </li>
                 <li class="nav-item">
