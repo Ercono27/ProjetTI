@@ -12,7 +12,7 @@ class MarqueDB extends Marque
     }
     public function getAllMarques()
     {
-        $query = "SELECT * FROM vue_marque ORDER BY nom_marque";
+        $query = "SELECT * FROM marque order by nom_marque";
         try {
             $this->_bd->beginTransaction();
             $resultset = $this->_bd->prepare($query);
@@ -26,6 +26,18 @@ class MarqueDB extends Marque
         } catch (PDOException $e) {
             $this->_bd->rollback();
             print "Echec de la requête " . $e->getMessage();
+        }
+    }
+    public function getMarque($id_marque)
+    {
+        try {
+            $query = "SELECT m.id_marque, m.nom_marque, m.image FROM marque m WHERE m.id_marque= :id_marque";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id_marque', $id_marque);
+            $res->execute();
+            return $res->fetch();
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
         }
     }
 

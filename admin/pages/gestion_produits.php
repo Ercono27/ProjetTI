@@ -39,7 +39,7 @@ else{
                 <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="nom_marque"><?= $liste[$i]->nom_marque;?></td>
                 <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="image"><?= $liste[$i]->image;?></td>
                 <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="description"><?= $liste[$i]->description;?></td>
-                <td><img src="public/images/delete.jpg" alt="Effacer" class="delete_prod">test</td>
+                <td><img src="public/images/delete.jpg" alt="Effacer" class="delete_prod"></td>
             </tr>
             <?php
         }

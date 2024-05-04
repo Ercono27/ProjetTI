@@ -16,6 +16,7 @@ if ($liste == -1) {
 } else {
     $nbr = count($liste);
 }
+//var_dump($liste);
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -70,7 +71,7 @@ if ($liste == -1) {
                             ?>
                             <div class="col">
                                 <div class="card h-100 shadow-sm">
-                                    <img src="<?php print $liste[$i]->image ?>"
+                                    <img src="<?php print $liste[$i]->image?>"
                                          class="bd-placeholder-img card-img-top" width="100%" height="225"
                                          alt="<?php print $liste[$i]->nom_produit ?>">
                                     <div class="card-body d-flex flex-column">

@@ -10,43 +10,35 @@ class CategorieDB extends Categorie
     {
         $this->_bd = $cnx;
     }
-    public function getProduitsById_cat($id_cat)
+
+    public function getAllCategories()
     {
-        $query = "SELECT * FROM vue_produits_cat_marque WHERE id_categorie = :id_cat";
+        $query = "select * from categorie order by nom_categorie";
         try {
             $this->_bd->beginTransaction();
             $resultset = $this->_bd->prepare($query);
-            $resultset->bindValue(':id_cat', $id_cat);
             $resultset->execute();
             $data = $resultset->fetchAll();
             foreach ($data as $d) {
-                $this->_array[] = new Categorie($d);
+                $_array[] = new Categorie($d);
             }
             $this->_bd->commit();
-            return $this->_array;
+            return $_array;
         } catch (PDOException $e) {
             $this->_bd->rollback();
             print "Echec de la requête " . $e->getMessage();
         }
     }
-
-    public function getAllCategories()
+    public function getCategorie($id_cat)
     {
-        $query = "select * from vue_categorie order by nom_categorie";
         try {
-            $this->_bd->beginTransaction();
-            $resultset = $this->_bd->prepare($query);
-            $resultset->execute();
-            $data = $resultset->fetchAll();
-            $this->_bd->commit();
-            foreach ($data as $d) {
-                $_array[] = new Categorie($d);
-            }
-            return $_array;
-            $this->_bd->commit();
+            $query = "SELECT c.id_categorie, c.nom_categorie, c.image FROM categorie c WHERE c.id_categorie= :id_cat";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id_cat', $id_cat);
+            $res->execute();
+            return $res->fetch();
         } catch (PDOException $e) {
-            $this->_bd->rollback();
-            print "Echec de la requête " . $e->getMessage();
+            print "Echec " . $e->getMessage();
         }
     }
 

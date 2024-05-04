@@ -1,8 +1,8 @@
 <?php
 $pro = new ProduitDB($cnx);
-$liste = $pro->getProduitsById_cat($_GET['id_categorie']);
-$ma1 = new CategorieDB($cnx);
-$mar = $ma1->getCategorie($_GET['id_categorie']);
+$liste = $pro->getProduitsById_mar($_GET['id_marque']);
+$ma1 = new MarqueDB($cnx);
+$mar = $ma1->getMarque($_GET['id_marque']);
 if (empty($liste)) {
     print "<br>Aucun produit de cette marque pour le moment </br>";
 } else {
@@ -14,7 +14,7 @@ if (empty($liste)) {
             <div class="col-md-15">
                 <div class="album py-5 bg-body-tertiary">
                     <div class="container">
-                        <h2><?php print $mar['nom_categorie'] ?></h2>
+                        <h2><?php print $mar['nom_marque'] ?></h2>
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             <?php
                             for ($i = 0; $i < $nbr; $i++) {

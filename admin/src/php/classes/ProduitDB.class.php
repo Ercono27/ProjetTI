@@ -138,6 +138,44 @@ class ProduitDB
         }
     }
 
+    public function getProduitsById_mar($id_mar)
+    {
+        $query = "SELECT * FROM produit WHERE id_marque = :id_mar";
+        try {
+            $this->_bd->beginTransaction();
+            $resultset = $this->_bd->prepare($query);
+            $resultset->bindValue(':id_mar', $id_mar);
+            $resultset->execute();
+            $data = $resultset->fetchAll();
+            foreach ($data as $d) {
+                $this->_array[] = new Produit($d);
+            }
+            $this->_bd->commit();
+            return $this->_array;
+        } catch (PDOException $e) {
+            $this->_bd->rollback();
+            print "Echec de la requête " . $e->getMessage();
+        }
+    }
+    public function getProduitsById_cat($id_cat)
+    {
+        $query = "SELECT * FROM produit WHERE id_categorie = :id_cat";
+        try {
+            $this->_bd->beginTransaction();
+            $resultset = $this->_bd->prepare($query);
+            $resultset->bindValue(':id_cat', $id_cat);
+            $resultset->execute();
+            $data = $resultset->fetchAll();
+            foreach ($data as $d) {
+                $this->_array[] = new Produit($d);
+            }
+            $this->_bd->commit();
+            return $this->_array;
+        } catch (PDOException $e) {
+            $this->_bd->rollback();
+            print "Echec de la requête " . $e->getMessage();
+        }
+    }
 
 
 }

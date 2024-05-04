@@ -44,6 +44,7 @@ $(document).ready(function () {
             data: param,
             url: './src/php/ajax/ajaxAjoutClient.php',
             success: function (data) {//data = retour du # php
+                window.location.href = 'index_.php?page=gestion_clients.php';
                 console.log(data);
             }
         })
@@ -74,6 +75,7 @@ $(document).ready(function () {
             url: './src/php/ajax/ajaxAjoutProduit.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
+                window.location.href = 'index_.php?page=gestion_produits.php';
             }
         })
     })
