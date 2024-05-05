@@ -43,7 +43,8 @@ $(document).ready(function () {
             dataType: 'json',
             data: param,
             url: './src/php/ajax/ajaxAjoutClient.php',
-            success: function (data) {//data = retour du # php
+            success: function (data) {//data
+                alert("Le client "+email+prenom+nom+" a bien été ajouté.");
                 window.location.href = 'index_.php?page=gestion_clients.php';
                 console.log(data);
             }
@@ -75,6 +76,7 @@ $(document).ready(function () {
             url: './src/php/ajax/ajaxAjoutProduit.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
+                alert("Le produit "+npro+" a bien été ajouté.");
                 window.location.href = 'index_.php?page=gestion_produits.php';
             }
         })
@@ -118,6 +120,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
+                alert("Le client "+id_client+" a bien été supprimé.");
                 window.location.reload();
             },
             error: function (xhr, status, error) {
@@ -137,6 +140,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
+                alert("Le produit "+id_produit+" a bien été supprimé.");
                 window.location.reload();
             },
             error: function (xhr, status, error) {
