@@ -4,12 +4,7 @@ $categorieDB = new CategorieDB($cnx);
 $categories = $categorieDB->getAllCategories();
 $marqueDB = new MarqueDB($cnx);
 $marques = $marqueDB->getAllMarques();
-if(isset($_GET['cat']) || isset($_GET['marque']) || isset($_GET['searchMinPrice']) || isset($_GET['searchMaxPrice'])) {
-    $rechercheDB = new ProduitDB($cnx);
-    $liste = $rechercheDB->rechercheProduit($_GET['cat'], $_GET['marque'], $_GET['searchMinPrice'], $_GET['searchMaxPrice']);
-} else {
-    $liste = $cat->getAllProduits();
-}
+$liste = $cat->getAllProduits();
 $flag = 0;
 if ($liste == -1) {
     $flag = 1;
@@ -46,14 +41,16 @@ if ($liste == -1) {
                         <div class="mb-3">
                             <label for="searchMinPrice" class="form-label">Prix minimum: <span
                                         id="minPriceLabel">0</span></label>
-                            <input type="range" class="form-range" id="searchMinPrice" name="searchMinPrice"  min="0" max="2550" step="10"
+                            <input type="range" class="form-range" id="searchMinPrice" name="searchMinPrice" min="0"
+                                   max="2550" step="10"
                                    value="0"
                                    oninput="document.getElementById('minPriceLabel').textContent = this.value;">
                         </div>
                         <div class="mb-3">
                             <label for="searchMaxPrice" class="form-label">Prix maximum: <span
                                         id="maxPriceLabel">2550</span></label>
-                            <input type="range" class="form-range" id="searchMaxPrice" name="searchMaxPrice" min="0" max="2550" step="10"
+                            <input type="range" class="form-range" id="searchMaxPrice" name="searchMaxPrice" min="0"
+                                   max="2550" step="10"
                                    value="10000"
                                    oninput="document.getElementById('maxPriceLabel').textContent = this.value;">
                         </div>
@@ -71,7 +68,7 @@ if ($liste == -1) {
                             ?>
                             <div class="col">
                                 <div class="card h-100 shadow-sm">
-                                    <img src="<?php print $liste[$i]->image?>"
+                                    <img src="<?php print $liste[$i]->image ?>"
                                          class="bd-placeholder-img card-img-top" width="100%" height="225"
                                          alt="<?php print $liste[$i]->nom_produit ?>">
                                     <div class="card-body d-flex flex-column">

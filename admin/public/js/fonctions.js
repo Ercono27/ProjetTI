@@ -158,7 +158,6 @@ $(document).ready(function () {
             return;
         }
 */
-        console.log(email, mdp, nom, prenom);
         let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&ville=' + ville + '&mdp=' + mdp;
         let retour = $.ajax({
             type: 'get',
@@ -174,7 +173,7 @@ $(document).ready(function () {
     $('btnAjoutPanier').click(function (e) {
         console.log('test');
     })
-
+    let url;
     $('#submit_recherche_approfondi').click(function (e) {
         e.preventDefault();
         const cat = $('#cat').val();
@@ -182,26 +181,9 @@ $(document).ready(function () {
         const searchMinPrice = $('#searchMinPrice').val();
         const searchMaxPrice = $('#searchMaxPrice').val();
 
-        let params = {
-            cat: cat,
-            marque: marque,
-            searchMinPrice: searchMinPrice,
-            searchMaxPrice: searchMaxPrice
-        };
-        console.log(params);
-        $.getJSON({
-            type: 'GET',
-            dataType: 'json',
-            data: params,
-            url: 'admin/src/php/ajax/ajaxProduitRecherche.php',
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-                alert('Erreur: ' + xhr.responseText);
-            }
-        });
+        url = 'index_.php?cat=' + encodeURIComponent(cat) + '&marque=' + encodeURIComponent(marque) + '&searchMinPrice=' + encodeURIComponent(searchMinPrice) + '&searchMaxPrice=' + encodeURIComponent(searchMaxPrice) + '&page=produit_recherche.php';
+
+        window.location.href = url;
     });
 });
 

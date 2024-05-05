@@ -103,8 +103,8 @@ class ProduitDB
     {
         try {
             $query = "SELECT p.id_produit, p.nom_produit, p.prix, p.stock, p.description, c.nom_categorie AS nom_cat, 
-                  m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie 
-                  INNER JOIN marque m ON p.id_marque = m.id_marque WHERE 1=1";
+                      m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie 
+                      INNER JOIN marque m ON p.id_marque = m.id_marque WHERE 1=1";
             $params = array();
             if ($cat !== '') {
                 $query .= " AND p.id_categorie = :cat";
@@ -157,6 +157,7 @@ class ProduitDB
             print "Echec de la requête " . $e->getMessage();
         }
     }
+
     public function getProduitsById_cat($id_cat)
     {
         $query = "SELECT * FROM produit WHERE id_categorie = :id_cat";
