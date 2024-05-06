@@ -41,5 +41,26 @@ class MarqueDB extends Marque
         }
     }
 
+    //TODO
+    public function recherchemarque($q)
+    {
+        $query = "SELECT * FROM marque WHERE nom_marque ILIKE '%' || :q || '%'";
+        try {
+            $this->_bd->beginTransaction();
+            $resultset = $this->_bd->prepare($query);
+            $resultset->bindValue(':q', $q);
+            $resultset->execute();
+            $data = $resultset->fetchAll();
+            foreach ($data as $d) {
+                $this->_array[] = new Marque($d);
+            }
+            $this->_bd->commit();
+            return $this->_array;
+        } catch (PDOException $e) {
+            $this->_bd->rollback();
+            print "Echec de la requête " . $e->getMessage();
+        }
+    }
+
 
 }

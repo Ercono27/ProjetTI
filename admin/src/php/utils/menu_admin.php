@@ -17,11 +17,6 @@
                 </li>
             </ul>
             <a href="index_.php?page=disconnect.php"><i class="bi bi-person-circle" style="font-size: 1.5em;height: fit-content;justify-content: center;margin-right: 2em;color: black"></i></a>
-
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
         </div>
     </div>
 </nav>

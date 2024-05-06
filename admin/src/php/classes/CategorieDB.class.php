@@ -41,5 +41,25 @@ class CategorieDB extends Categorie
             print "Echec " . $e->getMessage();
         }
     }
+    //TODO
+    public function rechercheCategorie($q)
+    {
+        $query = "SELECT * FROM categorie WHERE nom_categorie ILIKE '%' || :q || '%'";
+        try {
+            $this->_bd->beginTransaction();
+            $resultset = $this->_bd->prepare($query);
+            $resultset->bindValue(':q', $q);
+            $resultset->execute();
+            $data = $resultset->fetchAll();
+            foreach ($data as $d) {
+                $this->_array[] = new Categorie($d);
+            }
+            $this->_bd->commit();
+            return $this->_array;
+        } catch (PDOException $e) {
+            $this->_bd->rollback();
+            print "Echec de la requête " . $e->getMessage();
+        }
+    }
 
 }

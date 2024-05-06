@@ -23,8 +23,8 @@
                 <i class="bi bi-person-circle" style="font-size: 1.5em; margin-right: 0.5em"></i>
             </a>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"id="contenurecherche">
+                <button class="btn btn-outline-success" type="submit" id="rechercheglobale">Search</button>
             </form>
         </div>
     </div>

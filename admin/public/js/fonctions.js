@@ -189,6 +189,14 @@ $(document).ready(function () {
 
         window.location.href = url;
     });
+
+    $('#rechercheglobale').click(function (e) {
+        e.preventDefault();
+        const q = $('#contenurecherche').val();
+        url = 'index_.php?page=recherche.php&q=' + encodeURIComponent(q);
+        window.location.href = url;
+    });
+
 });
 
 

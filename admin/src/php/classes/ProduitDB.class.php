@@ -177,7 +177,26 @@ class ProduitDB
             print "Echec de la requête " . $e->getMessage();
         }
     }
-
+    //TODO
+    public function rechercheProduit2($q)
+    {
+        $query = "SELECT * FROM produit WHERE nom_produit LIKE %:q% OR description LIKE '%' || :q || '%'";
+        try {
+            $this->_bd->beginTransaction();
+            $resultset = $this->_bd->prepare($query);
+            $resultset->bindValue(':q', $q);
+            $resultset->execute();
+            $data = $resultset->fetchAll();
+            foreach ($data as $d) {
+                $this->_array[] = new Produit($d);
+            }
+            $this->_bd->commit();
+            return $this->_array;
+        } catch (PDOException $e) {
+            $this->_bd->rollback();
+            print "Echec de la requête " . $e->getMessage();
+        }
+    }
 
 }
 

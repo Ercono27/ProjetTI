@@ -1,5 +1,6 @@
 <h2>Gestion des produits</h2>
-<a href="index_.php?page=ajout_produit.php">Nouveau produit</a><br>
+
+<a href="index_.php?page=ajout_produit.php" id="nouveau">Nouveau produit</a>
 
 <?php
 $produits = new ProduitDB($cnx);
@@ -10,19 +11,18 @@ if($liste == -1){
 else{
     $nbr = count($liste);
     ?>
-    <table class="table table-striped">
-        <thead>
-
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nom produit</th>
-            <th scope="col">prix</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Image</th>
-            <th scope="col">Description</th>
-            <th scope="col">Supprimer</th>
+            <th scope="col" class="text-center">Id</th>
+            <th scope="col" class="text-center">Nom produit</th>
+            <th scope="col" class="text-center">Prix</th>
+            <th scope="col" class="text-center">Stock</th>
+            <th scope="col" class="text-center">Catégorie</th>
+            <th scope="col" class="text-center">Marque</th>
+            <th scope="col" class="text-center">Image</th>
+            <th scope="col" class="text-center">Description</th>
+            <th scope="col" class="text-center">Supprimer</th>
         </tr>
 
         </thead>
@@ -31,15 +31,15 @@ else{
         for($i=0; $i < $nbr; $i++){
             ?>
             <tr>
-                <th><?= $liste[$i]->id_produit;?></th>
-                <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="nom_produit"><?= $liste[$i]->nom_produit;?></td>
-                <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="prix"><?= $liste[$i]->prix;?></td>
-                <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="stock"><?= $liste[$i]->stock;?></td>
-                <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="nom_cat"><?= $liste[$i]->nom_cat;?></td>
-                <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="nom_marque"><?= $liste[$i]->nom_marque;?></td>
-                <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="image"><?= $liste[$i]->image;?></td>
-                <td contenteditable="true" id="<?= $liste[$i]->id_produit;?>" name="description"><?= $liste[$i]->description;?></td>
-                <td><img src="public/images/delete.jpg" alt="Effacer" class="delete_prod"></td>
+                <th class="text-center"><?= $liste[$i]->id_produit;?></th>
+                <td contenteditable="true" class="text-center" id="<?= $liste[$i]->id_produit;?>" name="nom_produit"><?= $liste[$i]->nom_produit;?></td>
+                <td contenteditable="true" class="text-center" id="<?= $liste[$i]->id_produit;?>" name="prix"><?= $liste[$i]->prix;?></td>
+                <td contenteditable="true" class="text-center" id="<?= $liste[$i]->id_produit;?>" name="stock"><?= $liste[$i]->stock;?></td>
+                <td contenteditable="true" class="text-center" id="<?= $liste[$i]->id_produit;?>" name="nom_cat"><?= $liste[$i]->nom_cat;?></td>
+                <td contenteditable="true" class="text-center" id="<?= $liste[$i]->id_produit;?>" name="nom_marque"><?= $liste[$i]->nom_marque;?></td>
+                <td contenteditable="true" class="text-center" id="<?= $liste[$i]->id_produit;?>" name="image"><?= $liste[$i]->image;?></td>
+                <td contenteditable="true" class="text-center" id="<?= $liste[$i]->id_produit;?>" name="description"><?= $liste[$i]->description;?></td>
+                <td class="text-center"><img src="public/images/delete.jpg" alt="Effacer" class="delete_prod"></td>
             </tr>
             <?php
         }
@@ -50,5 +50,3 @@ else{
     <?php
 }
 
-
-//affichage des clients existants
