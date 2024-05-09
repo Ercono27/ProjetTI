@@ -29,7 +29,7 @@ $nbr_cat = count($listec);
                     $nbr_pro = count($listep);
                     ?>
                     <?php for ($j = 0; $j < $nbr_pro; $j++) { ?>
-                        <option value="<?php print $listep[$j]->nom_marque." ".$listep[$j]->nom_produit; ?>"><?php echo $listep[$j]->nom_produit; ?></option>
+                        <option value="<?php echo $listep[$j]->nom_produit; ?>"><?php echo $listep[$j]->nom_marque ." ".$listep[$j]->nom_produit; ?></option>
                     <?php } ?>
                 </select>
             <?php } ?>
@@ -48,7 +48,7 @@ $nbr_cat = count($listec);
                     <option value=""></option>
                     <?php $pro = new ProduitDB($cnx); $listep=$pro->getProduitsById_cat($categorie->id_categorie);$nbr_pro = count($listep);?>
                     <?php for ($j = 0; $j < $nbr_pro; $j++) { ?>
-                        <option value="<?php echo $listep[$j]->nom_marque ." ".$listep[$j]->nom_produit; ?>"><?php echo $listep[$j]->nom_produit; ?></option>
+                        <option value="<?php echo $listep[$j]->nom_produit; ?>"><?php echo $listep[$j]->nom_marque ." ".$listep[$j]->nom_produit; ?></option>
                     <?php } ?>
                 </select>
             <?php } ?>
