@@ -18,6 +18,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index_.php?page=produits.php">Tout les produits</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index_.php?page=configurateur.php">Configurateur</a>
+                </li>
             </ul>
             <a href="index_.php?page=login.php" style="display: flex; align-items: center;text-decoration: none;color: black">
                 <i class="bi bi-person-circle" style="font-size: 1.5em; margin-right: 0.5em"></i>

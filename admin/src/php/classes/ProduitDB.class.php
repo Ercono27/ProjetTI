@@ -160,7 +160,7 @@ class ProduitDB
 
     public function getProduitsById_cat($id_cat)
     {
-        $query = "SELECT * FROM produit WHERE id_categorie = :id_cat";
+        $query = "SELECT * FROM vue_produits_cat_marque WHERE id_categorie = :id_cat";
         try {
             $this->_bd->beginTransaction();
             $resultset = $this->_bd->prepare($query);

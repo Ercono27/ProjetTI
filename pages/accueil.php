@@ -63,7 +63,7 @@ $pro4 = $pro->getProduit(22)
 <div class="col-md-9" style="margin-left: 10%;">
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <h2>Bazarres populaires</h2>
+            <h2>Offres du moment</h2>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card h-100 shadow-sm">
