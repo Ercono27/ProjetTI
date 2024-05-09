@@ -62,4 +62,18 @@ class CategorieDB extends Categorie
         }
     }
 
+    public function ajout_categorie($nom_cat,$image){
+        try{
+            $query="select ajout_categorie(:nom_cat,:image)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':nom_cat',$nom_cat);
+            $res->bindValue(':image',$image);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        }catch(PDOException $e){
+            print "Echec ".$e->getMessage();
+        }
+    }
+
 }

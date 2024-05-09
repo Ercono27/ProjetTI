@@ -197,6 +197,40 @@ $(document).ready(function () {
         window.location.href = url;
     });
 
+    $('#texte_bouton_submit_marque').click(function (e) { //e = formulaire
+        e.preventDefault(); //empêcher l'attribut action de form
+        let nom_marque = $('#nom_marque').val();
+        let image = $('#image').val();
+        let param = 'nom_marque=' + nom_marque + '&image=' + image;
+        let retour = $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: './src/php/ajax/ajaxAjoutProduit.php',
+            success: function (data) {//data = retour du # php
+                console.log(data);
+                alert("La marque "+nom_marque+" a bien été ajouté.");
+                window.location.href = 'index_.php?page=gestion_produits.php';
+            }
+        })
+    });
+    $('#texte_bouton_submit_categorie').click(function (e) {
+        e.preventDefault();
+        let nom_cat = $('#nom_cat').val();
+        let image = $('#image').val();
+        let param = 'nom_cat=' + nom_cat+ '&image=' + image;
+        let retour = $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: './src/php/ajax/ajaxAjoutCategorie.php',
+            success: function (data) {//data = retour du # php
+                console.log(data);
+                alert("La categorie "+nom_cat+" a bien été ajouté.");
+                window.location.href = 'index_.php?page=gestion_categorie.php';
+            }
+        })
+    });
 });
 
 
