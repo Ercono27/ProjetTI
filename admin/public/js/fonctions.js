@@ -60,14 +60,6 @@ $(document).ready(function () {
         let marque = $('#marque').val();
         let image = $('#image').val();
         let description = $('#description').val();
-        /*
-        console.log("Nom produit :", npro);
-        console.log("Prix :", prix);
-        console.log("Stock :", stock);
-        console.log("Catégorie :", cat);
-        console.log("Marque :", marque);
-        console.log("Image :", image);
-*/
         let param = 'npro=' + npro + '&prix=' + prix + '&stock=' + stock + '&cat=' + cat + '&marque=' + marque + '&image=' + image + '&description=' + description;
         let retour = $.ajax({
             type: 'get',
@@ -81,33 +73,7 @@ $(document).ready(function () {
             }
         })
     })
-    /*
-        $('#email').blur(function () {
-            let email = $(this).val();
-            console.log("email : " + email);
-            let parametre = 'email=' + email;
-            let retour = $.ajax({
-                type: 'get',
-                dataType: 'json',
-                data: parametre,
-                url: './src/php/ajax/ajaxRechercheClient.php',
-                success: function (data) {//data = retour du # php
-                    console.log(data);
-                    $('#nom').val(data[0].nom_client);
-                    $('#prenom').val(data[0].prenom_client);
-                    $('#adresse').val(data[0].adresse);
-                    $('#numero').val(data[0].numero);
-                    let nom2 = $('#nom').val();
-                    if (nom2 !== '') {
-                        $('#texte_bouton_submit').text("Modifier");
-                    } else {
-                        $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
-                    }
 
-                }
-            })
-        })
-    */
     $(document).on('click', '.delete_client', function () {
         let id_client = $(this).closest('tr').find('th').text();
         let param = 'id_client=' + id_client;

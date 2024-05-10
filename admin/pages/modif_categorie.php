@@ -25,7 +25,8 @@ $liste = $cat->getAllCategories();
     <button type="submit" class="btn btn-primary d-none" id="modifierSubmit">Soumettre</button>
 </form>
 
-<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,9 +59,9 @@ $liste = $cat->getAllCategories();
         <?php endforeach; ?>
     ];
 
-    document.getElementById('cat').addEventListener('change', function() {
+    document.getElementById('cat').addEventListener('change', function () {
         var selectedCatId = this.value;
-        var selectedCategory = categories.find(function(category) {
+        var selectedCategory = categories.find(function (category) {
             return category.id_categorie == selectedCatId;
         });
         if (selectedCategory) {
@@ -72,9 +73,9 @@ $liste = $cat->getAllCategories();
         }
     });
 
-    document.getElementById('modifier').addEventListener('click', function() {
+    document.getElementById('modifier').addEventListener('click', function () {
         var selectedCatId = document.getElementById('cat').value;
-        var selectedCategory = categories.find(function(category) {
+        var selectedCategory = categories.find(function (category) {
             return category.id_categorie == selectedCatId;
         });
         if (selectedCategory) {
@@ -84,7 +85,7 @@ $liste = $cat->getAllCategories();
             this.classList.remove('btn-secondary');
             this.classList.add('btn-primary');
             this.id = "confirmer";
-            document.getElementById('confirmer').addEventListener('click', function() {
+            document.getElementById('confirmer').addEventListener('click', function () {
                 document.getElementById('categorieId').textContent = selectedCatId;
                 document.getElementById('ancienNom').textContent = selectedCategory.nom_categorie;
                 document.getElementById('ancienneImage').textContent = selectedCategory.image;
@@ -97,32 +98,59 @@ $liste = $cat->getAllCategories();
             alert("Veuillez sélectionner une catégorie à modifier.");
         }
     });
-    document.getElementById('confirmModifier').addEventListener('click', function() {
+    document.getElementById('confirmModifier').addEventListener('click', function () {
         var selectedCatId = document.getElementById('cat').value;
-        var selectedCategory = categories.find(function(category) {
+        var selectedCategory = categories.find(function (category) {
             return category.id_categorie == selectedCatId;
         });
         if (selectedCategory) {
-            console.log('Données modifiées confirmées !');
-            document.getElementById('nom_categorie').readOnly = true;
-            document.getElementById('image').readOnly = true;
-            document.getElementById('modifier').textContent = "Modifier";
-            document.getElementById('modifier').classList.remove('btn-success');
-            document.getElementById('modifier').classList.add('btn-primary');
+            var nouveauNom = document.getElementById('nom_categorie').value;
+            var nouvelleImage = document.getElementById('image').value;
+
+            console.log("ID de catégorie sélectionné :", selectedCatId);
+            console.log("Catégorie sélectionnée :", selectedCategory);
+            console.log("Nom de catégorie modifié :", document.getElementById('nom_categorie').value);
+            console.log("URL de l'image modifiée :", document.getElementById('image').value);
+
+            $.ajax({
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    id_categorie: selectedCatId,
+                    nom_categorie: nouveauNom,
+                    image: nouvelleImage
+                },
+                url: './src/php/ajax/ajaxUpdateCategorie.php',
+                success: function (data) {
+                    if (data.success) {
+                        alert("La categorie "+selectedCatId+" a bien été modifiée.");
+                        window.location.href = 'index_.php?page=gestion_categorie.php';
+                        var nomCategorieElement = document.getElementById('nom_categorie');
+                        if (nomCategorieElement) {
+                            nomCategorieElement.readOnly = true;
+                        }
+                        var imageElement = document.getElementById('image');
+                        if (imageElement) {
+                            imageElement.readOnly = true;
+                        }
+                        var modifierElement = document.getElementById('modifier');
+                        if (modifierElement) {
+                            modifierElement.textContent = "Modifier";
+                            modifierElement.classList.remove('btn-success');
+                            modifierElement.classList.add('btn-primary');
+                        }
+                    } else {
+                        alert("Une erreur s'est produite lors de la modification des données.");
+                    }
+                }
+                ,
+                error: function () {
+                    alert("Une erreur s'est produite lors de la communication avec le serveur.");
+                }
+            });
         } else {
             alert("Veuillez sélectionner une catégorie à modifier.");
         }
-    });
-    document.getElementById('categorieForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var modifiedNomCategorie = document.getElementById('nom_categorie').value;
-        var modifiedImage = document.getElementById('image').value;
-        console.log('Nom de la catégorie modifié:', modifiedNomCategorie);
-        console.log('URL de l\'image modifié:', modifiedImage);
-        document.getElementById('nom_categorie').readOnly = true;
-        document.getElementById('image').readOnly = true;
-        document.getElementById('modifierSubmit').classList.add('d-none');
-        document.getElementById('modifier').classList.remove('d-none');
     });
 </script>
 

@@ -10,9 +10,13 @@
     align-content: center;
 }
 
+#gestion{
+    display: flex;
+    justify-content: space-around;
+}
 #nouveau{
     display: inline-block;
-    padding: 10px 20px;
+    padding: 20px;
     margin: 20px;
     text-decoration: none;
     background-color: #007bff;
