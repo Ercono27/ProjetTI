@@ -1,6 +1,8 @@
 <h2>Gestion des categories</h2>
 
-<a href="index_.php?page=ajout_categorie.php" id="nouveau">Nouvelle categorie</a>
+<a href="index_.php?page=ajout_categorie.php" id="nouveau">Nouvelle catégorie</a>
+
+<a href="index_.php?page=modif_categorie.php" id="nouveau">Modifier catégorie</a>
 
 <?php
 $cat = new CategorieDB($cnx);
