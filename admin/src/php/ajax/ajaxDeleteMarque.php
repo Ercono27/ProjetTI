@@ -8,7 +8,7 @@ require '../classes/MarqueDB.class.php';
 $cnx = Connexion::getInstance($dsn,$user,$password);
 
 $cl = new MarqueDB($cnx);
-$data[] = $cl->ajout_marque($_GET['nom_marque'],$_GET['image']);
+$data[] = $cl->deleteMarque($_GET['id_marque']);
 print json_encode($data);
 
 

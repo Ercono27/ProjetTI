@@ -11,8 +11,8 @@ begin
 	select into id id_marque from marque where nom_marque= p_nom_marque;
 	if not found
 	then
-	  insert into categorie (nom_marque,image) values
-	    (p_nom_marque,image);
+	  insert into marque (nom_marque,image) values
+	    (p_nom_marque,p_image);
 	  select into id id_marque from marque where nom_marque= p_nom_marque;
 	  if not found
 	  then	

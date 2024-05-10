@@ -110,7 +110,6 @@ $(document).ready(function () {
     */
     $(document).on('click', '.delete_client', function () {
         let id_client = $(this).closest('tr').find('th').text();
-
         let param = 'id_client=' + id_client;
         $.ajax({
             type: 'get',
@@ -197,8 +196,8 @@ $(document).ready(function () {
         window.location.href = url;
     });
 
-    $('#texte_bouton_submit_marque').click(function (e) { //e = formulaire
-        e.preventDefault(); //empêcher l'attribut action de form
+    $('#texte_bouton_submit_marque').click(function (e) {
+        e.preventDefault();
         let nom_marque = $('#nom_marque').val();
         let image = $('#image').val();
         let param = 'nom_marque=' + nom_marque + '&image=' + image;
@@ -206,11 +205,11 @@ $(document).ready(function () {
             type: 'get',
             dataType: 'json',
             data: param,
-            url: './src/php/ajax/ajaxAjoutProduit.php',
+            url: './src/php/ajax/ajaxAjoutMarque.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
                 alert("La marque "+nom_marque+" a bien été ajouté.");
-                window.location.href = 'index_.php?page=gestion_produits.php';
+                window.location.href = 'index_.php?page=gestion_marque.php';
             }
         })
     });
@@ -230,6 +229,45 @@ $(document).ready(function () {
                 window.location.href = 'index_.php?page=gestion_categorie.php';
             }
         })
+    });
+
+    $(document).on('click', '.delete_cat', function () {
+        let id_cat = $(this).closest('tr').find('th').text();
+        let param = 'id_categorie=' + id_cat;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: './src/php/ajax/ajaxDeleteCategorie.php',
+            success: function (data) {
+                console.log(data);
+                $(this).closest('tr').remove();
+                alert("La categorie "+id_cat+" a bien été supprimé.");
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+    $(document).on('click', '.delete_marque', function () {
+        let id_marque = $(this).closest('tr').find('th').text();
+        let param = 'id_marque=' + id_marque;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            data: param,
+            url: './src/php/ajax/ajaxDeleteMarque.php',
+            success: function (data) {
+                console.log(data);
+                $(this).closest('tr').remove();
+                alert("La marque "+id_marque+" a bien été supprimée.");
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
     });
 });
 

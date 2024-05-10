@@ -76,4 +76,18 @@ class CategorieDB extends Categorie
         }
     }
 
+    public function deleteCategorie($id)
+    {
+        try {
+            $query = "select delete_categorie(:id)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id', $id);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
+        }
+    }
+
 }

@@ -62,5 +62,32 @@ class MarqueDB extends Marque
         }
     }
 
+    public function ajout_marque($nom_marque,$image){
+        try{
+            $query="select ajout_marque(:nom_marque,:image)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':nom_marque',$nom_marque);
+            $res->bindValue(':image',$image);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        }catch(PDOException $e){
+            print "Echec ".$e->getMessage();
+        }
+    }
+
+    public function deleteMarque($id)
+    {
+        try {
+            $query = "select delete_marque(:id)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id', $id);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
+        }
+    }
 
 }

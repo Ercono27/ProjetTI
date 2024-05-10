@@ -12,7 +12,7 @@ begin
 	if not found
 	then
 	  insert into categorie (nom_categorie,image) values
-	    (p_nom_categorie,image);
+	    (p_nom_categorie,p_image);
 	  select into id id_categorie from categorie where nom_categorie= p_nom_categorie;
 	  if not found
 	  then	
