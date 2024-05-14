@@ -1,6 +1,6 @@
 <?php
-$cat = new CategorieDB($cnx);
-$liste = $cat->getAllCategories();
+$cat = new MarqueDB($cnx);
+$liste = $cat->getAllMarques();
 ?>
 
 <form id="categorieForm">
@@ -9,7 +9,7 @@ $liste = $cat->getAllCategories();
         <select class="form-control" id="cat" name="cat">
             <option value="">Sélectionnez une catégorie</option>
             <?php foreach ($liste as $category): ?>
-                <option value="<?= $category->id_categorie ?>"><?= $category->id_categorie ?></option>
+                <option value="<?= $category->id_marque ?>"><?= $category->id_marque ?></option>
             <?php endforeach; ?>
         </select>
     </div>
@@ -52,8 +52,8 @@ $liste = $cat->getAllCategories();
     var categories = [
         <?php foreach ($liste as $category): ?>
         {
-            id_categorie: <?= $category->id_categorie ?>,
-            nom_categorie: "<?= $category->nom_categorie ?>",
+            id_categorie: <?= $category->id_marque ?>,
+            nom_categorie: "<?= $category->nom_marque ?>",
             image: "<?= $category->image ?>"
         },
         <?php endforeach; ?>
@@ -120,11 +120,11 @@ $liste = $cat->getAllCategories();
                     nom_categorie: nouveauNom,
                     image: nouvelleImage
                 },
-                url: './src/php/ajax/ajaxUpdateCategorie.php',
+                url: './src/php/ajax/ajaxUpdateMarque.php',
                 success: function (data) {
                     if (data.success) {
-                        alert("La categorie " + selectedCatId + " a bien été modifiée.");
-                        window.location.href = 'index_.php?page=gestion_categorie.php';
+                        alert("La marque " + selectedCatId + " a bien été modifiée.");
+                        window.location.href = 'index_.php?page=gestion_marque.php';
                         var nomCategorieElement = document.getElementById('nom_categorie');
                         if (nomCategorieElement) {
                             nomCategorieElement.readOnly = true;

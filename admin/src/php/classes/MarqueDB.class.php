@@ -90,4 +90,19 @@ class MarqueDB extends Marque
         }
     }
 
+    public function updateMarque($id_cat,$nom_cat,$image){
+        try{
+            $query="select update_categorie(:id_cat,:nom_cat,:image)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id_cat',$id_cat);
+            $res->bindValue(':nom_cat',$nom_cat);
+            $res->bindValue(':image',$image);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        }catch(PDOException $e){
+            print "Echec ".$e->getMessage();
+        }
+    }
+
 }

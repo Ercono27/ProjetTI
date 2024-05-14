@@ -2,8 +2,6 @@
 //toujours vérifier la qualité d'admin
 require 'src/php/utils/verifier_connexion.php';
 ?>
-
-<!-- Main content -->
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
