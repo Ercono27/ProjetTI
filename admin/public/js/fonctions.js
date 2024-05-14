@@ -1,35 +1,11 @@
 $(document).ready(function () {
-    $("td[id]").click(function () {
-        //trim : supprimer les blancs avant et après
-        let valeur1 = $.trim($(this).text());
-        let id = $(this).attr('id');
-        let name = $(this).attr('name');
-        console.log(valeur1 + " id = " + id + " name = " + name);
-        $(this).blur(function () {
-            let valeur2 = $.trim($(this).text());
-            if (valeur1 != valeur2) {
-                let parametre = "id=" + id + "&name=" + name + "&valeur=" + valeur2;
-                let retour = $.ajax({
-                    type: 'get',
-                    dataType: 'json',
-                    data: parametre,
-                    url: './src/php/ajax/ajaxUpdateClient.php',
-                    success: function (data) {//data = retour du # php
-                        console.log(data);
-                    }
-                })
-            }
-        })
-    })
-
     $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
 
     $('#reset').click(function () {
         $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
     })
-
-    $('#texte_bouton_submit').click(function (e) { //e = formulaire
-        e.preventDefault(); //empêcher l'attribut action de form
+    $('#texte_bouton_submit').click(function (e) {
+        e.preventDefault();
         let email = $('#email').val();
         let nom = $('#nom').val();
         let prenom = $('#prenom').val();
@@ -43,8 +19,8 @@ $(document).ready(function () {
             dataType: 'json',
             data: param,
             url: './src/php/ajax/ajaxAjoutClient.php',
-            success: function (data) {//data
-                alert("Le client "+email+prenom+nom+" a bien été ajouté.");
+            success: function (data) {
+                alert("Le client " + email + prenom + nom + " a bien été ajouté.");
                 window.location.href = 'index_.php?page=gestion_clients.php';
                 console.log(data);
             }
@@ -68,7 +44,7 @@ $(document).ready(function () {
             url: './src/php/ajax/ajaxAjoutProduit.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
-                alert("Le produit "+npro+" a bien été ajouté.");
+                alert("Le produit " + npro + " a bien été ajouté.");
                 window.location.href = 'index_.php?page=gestion_produits.php';
             }
         })
@@ -85,7 +61,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
-                alert("Le client "+id_client+" a bien été supprimé.");
+                alert("Le client " + id_client + " a bien été supprimé.");
                 window.location.reload();
             },
             error: function (xhr, status, error) {
@@ -105,7 +81,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
-                alert("Le produit "+id_produit+" a bien été supprimé.");
+                alert("Le produit " + id_produit + " a bien été supprimé.");
                 window.location.reload();
             },
             error: function (xhr, status, error) {
@@ -121,7 +97,6 @@ $(document).ready(function () {
         let prenom = $('#prenom').val();
         let adresse = $('#adresse').val();
         let ville = $('#ville').val();
-
         /*if (email.trim() === '' || mdp.trim() === '' || nom.trim() === '' || prenom.trim() === '' || adresse.trim() === '' || ville.trim() === '') {
             alert('Veuillez remplir tous les champs du formulaire.');
             return;
@@ -174,7 +149,7 @@ $(document).ready(function () {
             url: './src/php/ajax/ajaxAjoutMarque.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
-                alert("La marque "+nom_marque+" a bien été ajouté.");
+                alert("La marque " + nom_marque + " a bien été ajouté.");
                 window.location.href = 'index_.php?page=gestion_marque.php';
             }
         })
@@ -183,7 +158,7 @@ $(document).ready(function () {
         e.preventDefault();
         let nom_cat = $('#nom_cat').val();
         let image = $('#image').val();
-        let param = 'nom_cat=' + nom_cat+ '&image=' + image;
+        let param = 'nom_cat=' + nom_cat + '&image=' + image;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
@@ -191,7 +166,7 @@ $(document).ready(function () {
             url: './src/php/ajax/ajaxAjoutCategorie.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
-                alert("La categorie "+nom_cat+" a bien été ajouté.");
+                alert("La categorie " + nom_cat + " a bien été ajouté.");
                 window.location.href = 'index_.php?page=gestion_categorie.php';
             }
         })
@@ -208,7 +183,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
-                alert("La categorie "+id_cat+" a bien été supprimé.");
+                alert("La categorie " + id_cat + " a bien été supprimé.");
                 window.location.reload();
             },
             error: function (xhr, status, error) {
@@ -227,7 +202,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(this).closest('tr').remove();
-                alert("La marque "+id_marque+" a bien été supprimée.");
+                alert("La marque " + id_marque + " a bien été supprimée.");
                 window.location.reload();
             },
             error: function (xhr, status, error) {
