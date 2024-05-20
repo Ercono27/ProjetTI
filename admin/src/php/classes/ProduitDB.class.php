@@ -50,10 +50,13 @@ class ProduitDB
     }
 
 
-    public function getAllProduits()
-    {
+    public function getAllProduits() {
         try {
-            $query = "SELECT p.id_produit, p.nom_produit, p.prix, p.stock,p.description, c.nom_categorie AS nom_cat, m.nom_marque AS nom_marque, p.image FROM produit p INNER JOIN categorie c ON p.id_categorie = c.id_categorie INNER JOIN marque m ON p.id_marque = m.id_marque ORDER BY p.id_produit;";
+            $query = "SELECT p.id_produit, p.nom_produit, p.prix, p.stock, p.description, p.id_categorie, c.nom_categorie AS nom_cat, p.id_marque, m.nom_marque AS nom_marque, p.image 
+                  FROM produit p 
+                  INNER JOIN categorie c ON p.id_categorie = c.id_categorie 
+                  INNER JOIN marque m ON p.id_marque = m.id_marque 
+                  ORDER BY p.id_produit";
             $res = $this->_bd->prepare($query);
             $res->execute();
             $data = $res->fetchAll();
@@ -65,11 +68,11 @@ class ProduitDB
             } else {
                 return -1;
             }
-            return $data;
         } catch (PDOException $e) {
             print "Echec " . $e->getMessage();
         }
     }
+
 
     public function getProduit($npro)
     {
@@ -195,6 +198,27 @@ class ProduitDB
         } catch (PDOException $e) {
             $this->_bd->rollback();
             print "Echec de la requête " . $e->getMessage();
+        }
+    }
+
+    public function modifier_produit($id,$npro, $prix, $stock, $cat, $marque, $image, $description)
+    {
+        try {
+            $query = "select update_produit(:id,:npro,:prix,:stock,:cat,:marque,:image,:description)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id', $id);
+            $res->bindValue(':npro', $npro);
+            $res->bindValue(':prix', $prix);
+            $res->bindValue(':stock', $stock);
+            $res->bindValue(':cat', $cat);
+            $res->bindValue(':marque', $marque);
+            $res->bindValue(':image', $image);
+            $res->bindValue(':description', $description);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
         }
     }
 

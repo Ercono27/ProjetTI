@@ -92,7 +92,7 @@ class MarqueDB extends Marque
 
     public function updateMarque($id_cat,$nom_cat,$image){
         try{
-            $query="select update_categorie(:id_cat,:nom_cat,:image)";
+            $query="select update_marque(:id_cat,:nom_cat,:image)";
             $res = $this->_bd->prepare($query);
             $res->bindValue(':id_cat',$id_cat);
             $res->bindValue(':nom_cat',$nom_cat);
