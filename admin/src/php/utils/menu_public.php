@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
+        <div class="wrapper">
+            <img src="../../../../../../TI/ProjetTI/admin/public/images/pedro.png" class="pedro" alt="logo">
+        </div>
         <a class="navbar-brand" href="#">LCLD</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,7 +29,7 @@
                 <i class="bi bi-person-circle" style="font-size: 1.5em; margin-right: 0.5em"></i>
             </a>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"id="contenurecherche">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="contenurecherche">
                 <button class="btn btn-outline-success" type="submit" id="rechercheglobale">Search</button>
             </form>
         </div>
