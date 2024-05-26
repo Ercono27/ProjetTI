@@ -1,4 +1,6 @@
-<h2>Gestion des produits</h2>
+<?php
+require 'src/php/utils/verifier_connexion.php';
+?><h2>Gestion des produits</h2>
 <div id="gestion">
     <a href="index_.php?page=ajout_produit.php" id="nouveau">Nouveau produit</a>
     <a href="index_.php?page=modif_produit.php" id="nouveau">Modifier produit</a>

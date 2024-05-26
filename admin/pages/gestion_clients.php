@@ -1,3 +1,6 @@
+<?php
+require 'src/php/utils/verifier_connexion.php';
+?>
 <h2>Gestion des clients</h2>
 <a href="index_.php?page=ajout_client.php" id="nouveau">Nouveau client</a><br>
 

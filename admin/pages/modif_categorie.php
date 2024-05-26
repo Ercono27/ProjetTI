@@ -1,4 +1,6 @@
 <?php
+require 'src/php/utils/verifier_connexion.php';
+?><?php
 $cat = new CategorieDB($cnx);
 $liste = $cat->getAllCategories();
 ?>

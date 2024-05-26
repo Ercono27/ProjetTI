@@ -5,6 +5,8 @@ $categorieDB = new CategorieDB($cnx);
 $categories = $categorieDB->getAllCategories();
 $marqueDB = new MarqueDB($cnx);
 $marques = $marqueDB->getAllMarques();
+?><?php
+require 'src/php/utils/verifier_connexion.php';
 ?>
 
 <form id="produitForm">
@@ -192,7 +194,7 @@ $marques = $marqueDB->getAllMarques();
                     location.reload();
                 } else {
                     alert('Erreur lors de la modification du produit');
-                    console.error(response.message); // Log the error message
+                    console.error(response.message);
                 }
             }
         };

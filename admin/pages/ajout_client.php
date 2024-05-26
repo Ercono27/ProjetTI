@@ -1,3 +1,6 @@
+<?php
+require 'src/php/utils/verifier_connexion.php';
+?>
 <h2>Ajout d'un client</h2>
 <div class="container">
     <form id="form_ajout" method="get" action="">

@@ -1,3 +1,6 @@
+<?php
+require 'src/php/utils/verifier_connexion.php';
+?>
 <h2>Gestion des categories</h2>
 <div id="gestion">
     <a href="index_.php?page=ajout_categorie.php" id="nouveau">Nouvelle catégorie</a>

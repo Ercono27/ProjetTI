@@ -4,7 +4,9 @@ $categories = $categorieDB->getAllCategories();
 $marqueDB = new MarqueDB($cnx);
 $marques = $marqueDB->getAllMarques();
 ?>
-
+<?php
+require 'src/php/utils/verifier_connexion.php';
+?>
 
 <h2>Gestion des produits</h2>
 <div class="container">

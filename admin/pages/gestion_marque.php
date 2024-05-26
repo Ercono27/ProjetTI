@@ -1,3 +1,6 @@
+<?php
+require 'src/php/utils/verifier_connexion.php';
+?>
 <h2>Gestion des marques</h2>
 <div id="gestion">
     <a href="index_.php?page=ajout_marque.php" id="nouveau">Nouvelle marque</a>
