@@ -100,21 +100,21 @@ class ClientDB
 
     public function getClient($login, $password)
     {
-        $query = "select verifier_client(:login,:password) as retour";
+        $query = "select * from client where email = :login and motdepasse = :password";
         try {
             $this->_bd->beginTransaction();
             $resultset = $this->_bd->prepare($query);
             $resultset->bindValue(':login', $login);
             $resultset->bindValue(':password', $password);
             $resultset->execute();
-            $retour = $resultset->fetchColumn(0);
-            return $retour;
+            $client = $resultset->fetch(PDO::FETCH_ASSOC);
             $this->_bd->commit();
+            return $client;
         } catch (PDOException $e) {
             $this->_bd->rollback();
             print "Echec de la requête " . $e->getMessage();
+            return false;
         }
-
     }
 
 

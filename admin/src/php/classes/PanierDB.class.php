@@ -26,7 +26,16 @@ class PanierDB
         }
     }
 
-    public function affichage_panier (){
-
+    public function affichage_panier ($id_client){
+        try {
+            $query="select * from panier where id_client = :id_client";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':id_client',$id_client);
+            $res->execute();
+            $data=$res->fetch();
+            return $data;
+        }catch (PDOException $e){
+            print "Echec ".$e->getMessage();
+        }
     }
 }

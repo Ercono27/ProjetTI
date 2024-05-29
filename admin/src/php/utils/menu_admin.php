@@ -1,3 +1,6 @@
+<?php
+require 'src/php/utils/verifier_connexion.php';
+?>
 <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
         <a class="navbar-brand">LCLD</a>
