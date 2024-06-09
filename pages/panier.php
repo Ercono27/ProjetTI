@@ -26,7 +26,7 @@ $totalPrixPanier = 0;
             $contenuPanier = $panierData['contenu'];
             $contenuPanier = trim($contenuPanier, '{}');
             $elements = explode(',', $contenuPanier);
-            $totalPrixPanier = 0; // Initialisation du total du panier
+            $totalPrixPanier = 0;
             for ($i = 0; $i < count($elements); $i += 2) {
                 $id_produit = $elements[$i];
                 $produit_details = $produitDB->getProduit($id_produit);
@@ -34,11 +34,10 @@ $totalPrixPanier = 0;
                 $quantite = $elements[$i + 1];
                 $prix_unitaire = $produit_details['prix'];
                 $prixt = (int)$prix_unitaire * $quantite;
-                $totalPrixPanier += $prixt; // Ajout au total du panier
-                // Construire la ligne du tableau
+                $totalPrixPanier += $prixt;
                 echo "<tr>";
                 echo "<td>$nom_produit</td>";
-                echo "<td>$prix_unitaire €</td>";
+                echo "<td>$prix_unitaire</td>";
                 echo "<td>$quantite</td>";
                 echo "<td>$prixt €</td>";
                 echo "</tr>";

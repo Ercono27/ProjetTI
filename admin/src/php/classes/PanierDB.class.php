@@ -13,7 +13,7 @@ class PanierDB
 
     public function ajout_panier($id_client,$id_produit,$nbr_produit){
         try{
-            $query="select insert_panier(:id_client,:id_produit,:nbr_produit)";
+            $query="select ajout_panier(:id_client,:id_produit,:nbr_produit)";
             $res = $this->_bd->prepare($query);
             $res->bindValue(':id_client',$id_client);
             $res->bindValue(':id_produit',$id_produit);

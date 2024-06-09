@@ -114,8 +114,36 @@ $(document).ready(function () {
             }
         })
     })
-    $('btnAjoutPanier').click(function (e) {
-        console.log('test');
+    $('#btnAjoutPanier').click(function(e) {
+        e.preventDefault();
+        let id_client = $('#id_client').val();
+        let id_produit = $('#id_produit').val();
+        let quantite = $('#quantite').val();
+        console.log('ID Client:', id_client);
+        console.log('ID Produit:', id_produit);
+        console.log('Quantité:', quantite);
+        let param = 'id_client='+id_client+'&id_produit='+id_produit+'&quantite='+quantite;
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            data: param,
+            url: 'admin/src/php/ajax/ajaxUpdatePanier.php',
+            success: function(data) {
+                console.log(data);
+                if (data.success) {
+                    window.location.href = 'index_.php?page=produits.php';
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Erreur Ajax:', status, error);
+            }
+        });
+    });
+
+    $('#btnAjoutPanierNON').click(function (e) {
+        e.preventDefault();
+        console.log('testNON');
+        alert("Vous devez être identifié pour ajouter au panier.");
     })
     let url;
     $('#submit_recherche_approfondi').click(function (e) {
