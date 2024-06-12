@@ -33,7 +33,7 @@ $totalPrixPanier = 0;
                 $nom_produit = $produit_details['nom_marque'] . ' ' . $produit_details['nom_produit'];
                 $quantite = $elements[$i + 1];
                 $prix_unitaire = $produit_details['prix'];
-                $prixt = (int)$prix_unitaire * $quantite;
+                $prixt = (float)$prix_unitaire * $quantite;
                 $totalPrixPanier += $prixt;
                 echo "<tr>";
                 echo "<td>$nom_produit</td>";
